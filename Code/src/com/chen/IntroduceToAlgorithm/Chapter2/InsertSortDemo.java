@@ -13,22 +13,38 @@ public class InsertSortDemo {
             for (int i = 0; i < strs.length; ++i) {
                 nums[i] = Integer.parseInt(strs[i]);
             }
-            int[] ouput = insertSortDemo.inserSort(nums);
-            System.out.println(Arrays.toString(ouput));
+            int[] ouput0 = insertSortDemo.inserSortASC(nums);
+            System.out.println(Arrays.toString(ouput0));
+
+            int[] ouput1 = insertSortDemo.inserSortDESC(nums);
+            System.out.println(Arrays.toString(ouput1));
         }
     }
 
-    public int[] inserSort(int[] nums) {
+    public int[] inserSortASC(int[] nums) {
         int len = nums.length;
         for (int j = 1; j < len; ++j) {
             int key = nums[j];
-            for (int i = j-1; i >=0; --i) {
-                if (key < nums[j]) {
-                    nums[i + 1] = nums[i];
-                } else {
-                    nums[i + 1] = key;
-                }
+            int i = j - 1;
+            while (i >= 0 && nums[i] > key) {
+                nums[i + 1] = nums[i];
+                i -= 1;
             }
+            nums[i + 1] = key;
+        }
+        return nums;
+    }
+
+    public int[] inserSortDESC(int[] nums) {
+        int len = nums.length;
+        for (int j = 1; j < len; ++j) {
+            int key = nums[j];
+            int i = j - 1;
+            while( i >= 0 && nums[i] < key) {
+                nums[i + 1] = nums[i];
+                i -= 1;
+            }
+            nums[i + 1] = key;
         }
         return nums;
     }
